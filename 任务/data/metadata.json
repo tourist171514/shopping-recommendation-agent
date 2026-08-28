@@ -1,0 +1,7 @@
+{
+  "source": "https://github.com/stockholmux/ecommerce-sample-set",
+  "license": "Creative Commons Attribution-Share Alike 3.0 Unported, per upstream README",
+  "num_products": 96,
+  "num_public_tasks": 50,
+  "seed": 20260705
+}

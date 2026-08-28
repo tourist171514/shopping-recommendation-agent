@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>购物助手</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <!-- 顶栏 -->
+  <header class="topbar">
+    <div class="brand">购物助手</div>
+    <button id="new-chat" class="ghost-btn" type="button">新对话</button>
+  </header>
+
+  <!-- 累积约束面板（需求 U2/U3：多轮约束可视化） -->
+  <div id="constraint-bar" class="constraint-bar hidden">
+    <span class="bar-label">当前条件</span>
+    <div id="constraint-chips" class="chips"></div>
+  </div>
+
+  <!-- 对话区 -->
+  <main id="chat" class="chat">
+    <div id="welcome" class="welcome">
+      <h2>你好，我是购物助手</h2>
+      <p>告诉我你想买什么，我会检索商品库、比较候选、核对条件后给出推荐。<br>信息不足时我会主动追问。</p>
+      <div class="examples">
+        <button class="example" type="button">Find a shirt about Barn from Konopelski-Inc with price under $17.</button>
+        <button class="example" type="button">Buy an affordable mug related to Sunny; prefer Bayer-and-Sons if available.</button>
+        <button class="example" type="button">帮我找一件 15 美元以内的 Ocean 主题衬衫</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 输入栏 -->
+  <footer class="input-bar">
+    <textarea id="input" rows="1" placeholder="描述你的购物需求，例如：找一件 $20 以内的 Dog 主题马克杯"></textarea>
+    <button id="send" class="send-btn" type="button">发送</button>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

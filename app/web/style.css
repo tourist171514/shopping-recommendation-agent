@@ -1,0 +1,248 @@
+/* 简约电商风格：白底 + 浅灰分隔 + 单一主色（仅用于价格/关键操作）。
+   参考淘宝/Amazon 客户端：信息密度优先，无渐变、无重阴影、无花哨动效。 */
+
+:root {
+  --accent: #ff5000;        /* 主色：仅价格、发送按钮、已选标记 */
+  --text: #222;
+  --muted: #999;
+  --line: #ececec;
+  --bg: #f6f6f6;
+  --card: #fff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang SC",
+               "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-size: 16px; font-weight: 600; }
+.ghost-btn {
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.ghost-btn:hover { border-color: #ccc; }
+
+/* ---------- 约束面板 ---------- */
+.constraint-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.bar-label { color: var(--muted); font-size: 12px; flex-shrink: 0; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: #f5f5f5;
+  border: 1px solid var(--line);
+  color: #555;
+}
+
+/* ---------- 对话区 ---------- */
+.chat {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.welcome { text-align: center; margin-top: 60px; }
+.welcome h2 { font-size: 18px; font-weight: 600; }
+.welcome p { color: var(--muted); font-size: 13px; }
+.examples {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.example {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+  color: #444;
+  cursor: pointer;
+}
+.example:hover { border-color: #ccc; }
+
+/* ---------- 消息气泡 ---------- */
+.msg-user {
+  align-self: flex-end;
+  max-width: 82%;
+  background: #ffece0;           /* 淡橙底，贴近淘宝消息风格 */
+  border-radius: 8px 8px 2px 8px;
+  padding: 8px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg-agent {
+  align-self: flex-start;
+  max-width: 92%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px 8px 8px 2px;
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.msg-agent b { color: var(--text); }
+
+.thinking {
+  color: var(--muted);
+  font-size: 13px;
+  padding: 4px 2px;
+}
+
+/* ---------- 推理时间线（需求 N3：trace 可视化） ---------- */
+details.trace {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--card);
+  font-size: 12px;
+  color: #666;
+}
+details.trace summary {
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--muted);
+  list-style: none;
+}
+details.trace summary::before { content: "▸ "; }
+details.trace[open] summary::before { content: "▾ "; }
+.trace-list {
+  margin: 0;
+  padding: 0 10px 8px 26px;
+}
+.trace-list li { margin: 3px 0; }
+.trace-list .tk { color: #bbb; margin-left: 6px; }
+
+/* ---------- 商品卡片 ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  position: relative;
+}
+.card.picked { border-color: var(--accent); }
+.card .name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.card .price { color: var(--accent); font-size: 16px; font-weight: 700; }
+.card .meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.card .tags { margin-top: 6px; display: flex; gap: 4px; flex-wrap: wrap; }
+.card .tag {
+  font-size: 11px;
+  background: #f5f5f5;
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: #666;
+}
+.card .badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+.card .reasons { margin-top: 6px; font-size: 12px; color: #888; }
+
+/* ---------- 追问选项（需求 F8：可点击的放宽选项） ---------- */
+.options { display: flex; gap: 8px; flex-wrap: wrap; }
+.option-btn {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: var(--card);
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.option-btn:hover { background: #fff7f2; }
+
+/* ---------- 输入栏 ---------- */
+.input-bar {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+}
+#input {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  max-height: 96px;
+}
+#input:focus { border-color: #ccc; }
+.send-btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.send-btn:disabled { background: #ffb38f; cursor: not-allowed; }
+
+.hidden { display: none; }

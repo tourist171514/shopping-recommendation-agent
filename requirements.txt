@@ -1,0 +1,11 @@
+# 购物 Agent 原型系统 —— 实际依赖清单
+# （原材料包的 numpy/pandas/scikit-learn/pillow 已确认不需要：
+#   检索为纯结构化过滤，无语义向量、无数值计算、无图片处理）
+
+openai>=2.50.0        # DeepSeek API 客户端（OpenAI 兼容接口）
+python-dotenv>=1.0.1  # 从 .env 读取 API key（密钥不进代码）
+fastapi>=0.115.6      # Web API + SSE 事件流
+uvicorn>=0.34.0       # ASGI 服务器
+
+# 测试脚本用（tests/、API 联调）
+requests>=2.34.2
