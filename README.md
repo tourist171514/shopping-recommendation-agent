@@ -31,9 +31,11 @@
 ```text
 .
 ├── app/          # 核心应用（agent 编排 / 检索 / LLM 封装 / 会话状态 / Web API / 前端）
-├── docs/         # 01 需求分析 · 02 技术选型 · 03 企业级扩展展望
+├── docs/         # 01 需求分析 · 02 技术选型 · 03 企业级扩展展望 · 04 实验报告
+├── eval/         # 评测：50 任务批量运行 / 自动评估 / 全集（1740 商品）准备与评测
 ├── tests/        # 检索模块单元测试
 ├── 任务/         # 原始材料包（题目、商品库与任务数据、starter 模板）
+├── outputs/      # 代表性运行记录（50 任务 batch_results.jsonl）
 ├── requirements.txt
 └── .env.example  # 环境变量示例
 ```
@@ -57,7 +59,22 @@ python -m app.api.server
 ## 运行测试
 
 ```bash
-PYTHONIOENCODING=utf-8 python -m tests.test_retrieval
+python -m tests.test_retrieval
+```
+
+测试为检索层纯代码单测（18 项，不依赖 API Key / 网络），已接入 GitHub Actions 自动验证。
+
+## 评测复现
+
+```bash
+# 50 条公开任务全量批量运行（需要 .env 中的 API Key）
+python -m eval.batch_run
+
+# 基于 outputs/batch_results.jsonl 的硬约束满足率自动评估（离线）
+python -m eval.auto_eval
+
+# 全集（1740 商品 / 150 合成任务）检索层评测（离线）
+python -m eval.fullset_eval --skip-baseline --skip-llm
 ```
 
 ## 数据与题目来源
@@ -66,4 +83,6 @@ PYTHONIOENCODING=utf-8 python -m tests.test_retrieval
 
 ## License
 
-[MIT](LICENSE)
+项目代码以 [MIT](LICENSE) 协议开源；`任务/` 目录中的数据集来源于
+[stockholmux/ecommerce-sample-set](https://github.com/stockholmux/ecommerce-sample-set)，
+沿用其 **CC BY-SA 3.0** 许可（详见 [docs/04_实验报告.md](docs/04_实验报告.md)）。

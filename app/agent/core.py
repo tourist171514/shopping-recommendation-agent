@@ -77,6 +77,7 @@ class Agent:
             "trace": (done or {}).get("trace", []),
             "summary": decision.get("answer_text", ""),
             "usage": (done or {}).get("usage_total", {}),
+            "rounds_used": (done or {}).get("rounds_used", 0),
         }
 
     # ------------------------------------------------------------------

@@ -17,6 +17,11 @@ venv/
 # 运行产物（保留有代表性的，忽略临时输出）
 outputs/tmp/
 *.log
+# 全集评测：上游原始下载与临时目录不入库（可用 eval/fullset_prepare.py 重建）
+outputs/fullset/items.json
+outputs/fullset/companies.json
+outputs/fullset/README.md
+outputs/fullset/data_dir/
 
 # 系统文件
 .DS_Store
